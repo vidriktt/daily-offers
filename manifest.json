@@ -4,7 +4,7 @@
 	"version": "0.1",
 	"manifest_version": 3,
 	"icons": {
-		"128": "./images/_.png"
+		"128": "./images/utensils.png"
 	},
 	"background": {
 		"service_worker": "background.js"
@@ -12,7 +12,14 @@
 	"action": {
 		"default_popup": "./popup/index.html",
 		"default_icons": {
-			"128": "./images/_.png"
+			"128": "./images/utensils.png"
 		}
-	}
+	},
+	"permissions": [
+		"storage"
+	],
+	"host_permissions": [
+		"https://xn--pevapakkumised-5hb.ee/*",
+		"https://päevapakkumised-5hb.ee/*"
+	]
 }

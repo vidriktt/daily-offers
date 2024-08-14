@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	(async () => {
-		const apiURL = '';
+		const apiURL = 'https://xn--pevapakkumised-5hb.ee/tartu/';
 
 		switch (request.action) {
 			case "getData":
