@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Daily offers</title>
     <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="./uikit/css/uikit.min.css" />
+    <link href="./uikit/css/uikit.min.css" rel="stylesheet"/>
     <script src="./uikit/js/uikit.min.js"></script>
     <script src="./uikit/js/uikit-icons.min.js"></script>
 </head>
 
 <body>
-<div>
-    <h1>Daily offers</h1>
+<div class="uk-margin-small uk-margin-small-left uk-margin-small-right">
+    <div class="uk-inline uk-width-1-1 uk-margin-small-top">
+        <button
+            class="uk-button uk-button-default uk-width-1-1"
+            id="location-button"
+            type="button"
+        >
+            Select Location
+        </button>
+        <div
+            class="dark-container"
+            id="location-select-list"
+            uk-dropdown="mode: click; animation: slide-top; animate-out: true; duration: 700"
+        >
+            <ul class="uk-nav uk-dropdown-nav" id="location-select-list-ul">
+                <li class="uk-margin">
+                    <input
+                        aria-label="Location search"
+                        class="uk-input uk-form-small insert"
+                        id="location-search"
+                        placeholder="Search"
+                        type="text"
+                    />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div
+        class="dark-container uk-margin-small uk-margin-small-left uk-margin-small-right"
+        id="offers"
+    >
+        <hr/>
+    </div>
 </div>
 <script src="script.js"></script>
 </body>

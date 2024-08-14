@@ -1,0 +1,76 @@
+body {
+    width: 400px;
+    height: 500px;
+    color: white;
+    font-size: 30px;
+    background-color: rgb(16, 7, 23);
+}
+
+.offer {
+    font-size: 14px !important;
+}
+
+.uk-badge {
+    margin: 3px !important;
+}
+
+.badge-red {
+    background: rgb(255, 0, 0);
+}
+
+.badge-orange {
+    background: rgb(255, 157, 0);
+}
+
+.badge-blue {
+    background: rgb(33, 218, 255);
+    color: black !important;
+}
+
+#location-button {
+    color: white;
+    border-radius: 5px;
+    border-color: inherit;
+    line-height: 20px;
+    min-height: 50px;
+}
+
+.dark-container {
+    border-radius: 5px;
+    background-color: rgb(16, 7, 23) !important;
+    overflow-y: auto;
+}
+
+#location-select-list {
+    height: 425px;
+    width: 380px;
+}
+
+#location-search {
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(16, 7, 23);
+}
+
+#offers {
+    width: 358px;
+    height: 430px;
+}
+
+.location-option {
+    padding: 5px 0;
+}
+
+.location-option:hover {
+    font-weight: 500;
+}
+
+.location-task::before {
+    content: "-";
+    display: inline-block;
+    line-height: 1;
+}
+
+.location-task:hover {
+    font-weight: 500;
+}

@@ -2,7 +2,6 @@
 
 Chrome plugin for daily lunch offers in Estonia
 
-
 ## Install
 
 1. Clone the repository
