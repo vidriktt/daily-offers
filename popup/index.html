@@ -10,17 +10,17 @@
 </head>
 
 <body>
-<div class="uk-margin-small uk-margin-small-left uk-margin-small-right">
-    <div class="uk-inline uk-width-1-1 uk-margin-small-top">
+<div class="uk-margin-small uk-margin-small-left uk-margin-small-right" id="daily-offers-popup">
+    <div class="uk-inline uk-width-1-1 uk-margin-small-top uk-margin-small-left uk-margin-small-right" id="top-holder">
         <button
             class="uk-button uk-button-default uk-width-1-1"
             id="location-button"
             type="button"
         >
-            Select Location
+            Add Location
         </button>
         <div
-            class="dark-container"
+            class="dark-container uk-width-1-1"
             id="location-select-list"
             uk-dropdown="mode: click; animation: slide-top; animate-out: true; duration: 700"
         >
@@ -38,11 +38,19 @@
         </div>
     </div>
     <div
-        class="dark-container uk-margin-small uk-margin-small-left uk-margin-small-right"
+        class="dark-container uk-margin uk-margin-small-left uk-margin-small-right"
         id="offers"
     >
-        <hr/>
+        <ul class="uk-margin-small-left uk-margin-small-right" id="selected-locations"
+            uk-accordion="multiple: true"></ul>
     </div>
+    <button
+        class="uk-button uk-button-link uk-button-small uk-width-1-1"
+        id="reset-button"
+        type="button"
+    >
+        Reset
+    </button>
 </div>
 <script src="script.js"></script>
 </body>

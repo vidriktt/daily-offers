@@ -1,9 +1,17 @@
+html {
+    background-color: #100717 !important;
+}
+
 body {
     width: 400px;
     height: 500px;
-    color: white;
+    color: #fff;
     font-size: 30px;
-    background-color: rgb(16, 7, 23);
+    background-color: #100717;
+}
+
+#daily-offers-popup {
+    height: 660px;
 }
 
 .offer {
@@ -15,20 +23,24 @@ body {
 }
 
 .badge-red {
-    background: rgb(255, 0, 0);
+    background: #f00;
 }
 
 .badge-orange {
-    background: rgb(255, 157, 0);
+    background: #ff9d00;
 }
 
 .badge-blue {
-    background: rgb(33, 218, 255);
-    color: black !important;
+    background: #21daff;
+    color: #000 !important;
+}
+
+#top-holder {
+    width: calc(100% - 20px);
 }
 
 #location-button {
-    color: white;
+    color: #fff;
     border-radius: 5px;
     border-color: inherit;
     line-height: 20px;
@@ -37,24 +49,38 @@ body {
 
 .dark-container {
     border-radius: 5px;
-    background-color: rgb(16, 7, 23) !important;
+    background-color: #100717 !important;
     overflow-y: auto;
 }
 
 #location-select-list {
-    height: 425px;
+    height: 600px;
     width: 380px;
 }
 
 #location-search {
     border-radius: 5px;
-    color: white;
-    background-color: rgb(16, 7, 23);
+    color: #fff;
+    background-color: #100717;
 }
 
 #offers {
     width: 358px;
     height: 430px;
+}
+
+.uk-accordion-title {
+    color: #fff;
+}
+
+.uk-accordion-content {
+    width: 330px;
+    height: fit-content;
+}
+
+.location-title {
+    position: relative;
+    user-select: none;
 }
 
 .location-option {
@@ -73,4 +99,15 @@ body {
 
 .location-task:hover {
     font-weight: 500;
+}
+
+.remove-button {
+    position: absolute;
+    top: 2px;
+    right: 30px;
+    background-color: #555;
+}
+
+.remove-button:hover {
+    opacity: 80%;
 }

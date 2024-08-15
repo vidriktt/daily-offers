@@ -1,7 +1,7 @@
 {
 	"name": "Daily offers",
 	"description": "Chrome plugin for daily lunch offers in Estonia",
-	"version": "0.1",
+	"version": "0.2",
 	"manifest_version": 3,
 	"icons": {
 		"128": "./images/utensils.png"
