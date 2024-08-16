@@ -58,7 +58,7 @@ async function getDataFromHtml(html) {
 
 	const data = {
 		selectedLocations: [],
-		openLocations: [],
+		expandedLocations: [],
 		locations: [],
 	};
 	const parser = new DOMParser();
@@ -68,8 +68,12 @@ async function getDataFromHtml(html) {
 	data.selectedLocations = selectedLocations;
 	data.expandedLocations = expandedLocations;
 	data.locations = [...offerLayouts].map((offerLayout) => {
-		const offerElements = offerLayout.querySelectorAll('.offer');
 		const place = offerLayout.getElementsByTagName('h3')[0];
+		const offerElements = offerLayout.querySelectorAll('.offer');
+
+		if (!place || !offerElements || offerElements.length === 0) {
+			return;
+		}
 
 		const offers = [...offerElements].map((offer) => {
 			const priceElement = offer.getElementsByTagName('strong')[0];
@@ -99,6 +103,8 @@ async function getDataFromHtml(html) {
 		};
 	});
 
+	data.locations = data.locations.filter(location => location);
+
 	return data;
 }
 
@@ -119,7 +125,6 @@ function addLocation(location) {
 
 	locationContent.className = 'uk-accordion-content container uk-padding-small';
 	locationListItem.appendChild(locationContent);
-
 
 	location.offers.forEach((item) => {
 		const lineElement = document.createElement('hr');
@@ -144,13 +149,23 @@ function addLocation(location) {
 
 function addFoodBadges(offerElement, offer) {
 	[
-		{food: 'kala', color: 'red'},
-		{food: 'pangasius', color: 'red'},
-		{food: 'lõhe', color: 'red'},
-		{food: 'tilaapia', color: 'red'},
-		{food: 'tursa', color: 'red'},
-		{food: 'filee', color: 'orange'},
-		{food: 'supp', color: 'blue'},
+		{food: 'liha', color: 'red'},
+		{food: 'kana', color: 'red'},
+		{food: 'filee', color: 'red'},
+		{food: 'pork', color: 'red'},
+		{food: 'chicken', color: 'red'},
+		{food: 'beef', color: 'red'},
+		{food: 'kala', color: 'blue'},
+		{food: 'lõhe', color: 'blue'},
+		{food: 'fish', color: 'blue'},
+		{food: 'supp', color: 'tan'},
+		{food: 'soup', color: 'tan'},
+		{food: 'ramen', color: 'tan'},
+		{food: 'pasta', color: 'yellow'},
+		{food: 'taimne', color: 'green'},
+		{food: 'taimetoit', color: 'green'},
+		{food: 'vegetarian', color: 'green'},
+		{food: 'vegan', color: 'green'},
 	].forEach(
 		(option) => {
 			if (offer.toLowerCase().includes(option.food)) {
@@ -178,6 +193,7 @@ chrome.runtime.sendMessage({
 	let selectedLocations = data.selectedLocations;
 	let expandedLocations = data.expandedLocations;
 
+	const dropdown = UIkit.dropdown('#location-select-list');
 	const locationListElement = document.getElementById('location-select-list-ul');
 	const selectedLocationsElement = document.getElementById('selected-locations');
 	const locationSearchElement = document.getElementById('location-search');
@@ -222,6 +238,8 @@ chrome.runtime.sendMessage({
 					await setValue('locations', selectedLocations);
 					locationListItem.remove();
 				});
+
+				dropdown.hide(false);
 			}
 		});
 

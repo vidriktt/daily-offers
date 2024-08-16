@@ -1,10 +1,10 @@
 html {
-    background-color: #100717 !important;
+    background-color: #100717;
 }
 
 body {
     width: 400px;
-    height: 500px;
+    height: 660px;
     color: #fff;
     font-size: 30px;
     background-color: #100717;
@@ -26,21 +26,31 @@ body {
     background: #f00;
 }
 
-.badge-orange {
-    background: #ff9d00;
-}
-
 .badge-blue {
     background: #21daff;
-    color: #000 !important;
+}
+
+.badge-tan {
+    background: #d2b48c;
+}
+
+.badge-yellow {
+    background: #ffc300;
+}
+
+.badge-green {
+    background: #4caf50;
 }
 
 #top-holder {
     width: calc(100% - 20px);
 }
 
+.uk-button {
+    color: white;
+}
+
 #location-button {
-    color: #fff;
     border-radius: 5px;
     border-color: inherit;
     line-height: 20px;
@@ -49,7 +59,7 @@ body {
 
 .dark-container {
     border-radius: 5px;
-    background-color: #100717 !important;
+    background-color: #100717;
     overflow-y: auto;
 }
 
@@ -62,11 +72,6 @@ body {
     border-radius: 5px;
     color: #fff;
     background-color: #100717;
-}
-
-#offers {
-    width: 358px;
-    height: 430px;
 }
 
 .uk-accordion-title {
