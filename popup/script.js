@@ -51,8 +51,14 @@ async function getDataFromHtml(html) {
 		selectedLocations = [];
 	}
 
+	let expandedLocations = await getValue('open-locations');
+	if (!expandedLocations) {
+		expandedLocations = [];
+	}
+
 	const data = {
 		selectedLocations: [],
+		openLocations: [],
 		locations: [],
 	};
 	const parser = new DOMParser();
@@ -60,6 +66,7 @@ async function getDataFromHtml(html) {
 	const offerLayouts = doc.querySelectorAll('.offerLayout');
 
 	data.selectedLocations = selectedLocations;
+	data.expandedLocations = expandedLocations;
 	data.locations = [...offerLayouts].map((offerLayout) => {
 		const offerElements = offerLayout.querySelectorAll('.offer');
 		const place = offerLayout.getElementsByTagName('h3')[0];
@@ -169,6 +176,8 @@ chrome.runtime.sendMessage({
 	console.log('dataFromHtml', data);
 
 	let selectedLocations = data.selectedLocations;
+	let expandedLocations = data.expandedLocations;
+
 	const locationListElement = document.getElementById('location-select-list-ul');
 	const selectedLocationsElement = document.getElementById('selected-locations');
 	const locationSearchElement = document.getElementById('location-search');
@@ -222,21 +231,36 @@ chrome.runtime.sendMessage({
 		if (locationOption.selected) {
 			const locationListItem = addLocation(locationOption);
 
+			if (expandedLocations.includes(locationOption.name)) {
+				locationListItem.className += ' uk-open';
+			}
+
 			selectedLocationsElement.appendChild(locationListItem);
+
+			locationListItem.children[0].addEventListener('click', async () => {
+				if (locationListItem.classList.contains('uk-open')) {
+					locationListItem.classList.add('uk-toggle-leave');
+
+					expandedLocations = expandedLocations.filter((location) => {
+						return location !== locationOption.name;
+					});
+				} else {
+					expandedLocations = [...expandedLocations, locationOption.name];
+				}
+
+				await setValue('open-locations', expandedLocations);
+			});
 
 			locationListItem.children[0].children[0].addEventListener('click', async () => {
 				selectedLocations = selectedLocations.filter((location) => {
 					return location !== locationOption.name;
 				});
+
 				await setValue('locations', selectedLocations);
 				locationListItem.remove();
 			});
 		}
 	});
-
-	if (selectedLocations.length > 0) {
-		selectedLocationsElement.children[0].className += ' uk-open';
-	}
 
 	resetButtonElement.addEventListener('click', async () => {
 		selectedLocationsElement.innerHTML = '';
