@@ -42,6 +42,11 @@ body {
     background: #4caf50;
 }
 
+.badge-icon {
+    margin: 3px;
+    scale: 0.9;
+}
+
 #top-holder {
     width: calc(100% - 20px);
 }

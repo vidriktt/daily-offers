@@ -76,6 +76,16 @@ async function getDataFromHtml(html) {
 		}
 
 		const offers = [...offerElements].map((offer) => {
+			const spanElements = offer.getElementsByTagName('span');
+			const imgElements = offer.getElementsByTagName('img');
+
+			let imgTitles = imgElements.length > 0 ? [...imgElements].map((img) => img.title) : undefined;
+
+			if (spanElements.length > 0) {
+				offer = spanElements[0];
+				imgTitles = imgTitles?.splice(0, imgTitles.length / 2);
+			}
+
 			const priceElement = offer.getElementsByTagName('strong')[0];
 			let food = offer.textContent;
 			let price = null;
@@ -93,6 +103,7 @@ async function getDataFromHtml(html) {
 			return {
 				name: food,
 				price,
+				imgTitles: imgTitles ? imgTitles : undefined,
 			};
 		});
 
@@ -141,7 +152,11 @@ function addLocation(location) {
 			addBadge(offerElement, 'badge-price', item.price.amountText);
 		}
 
-		addFoodBadges(offerElement, item.name);
+		addFoodBadges(offerElement, item);
+
+		if (item.imgTitles) {
+			addImages(offerElement, item.imgTitles);
+		}
 	});
 
 	return locationListItem;
@@ -168,8 +183,10 @@ function addFoodBadges(offerElement, offer) {
 		{food: 'vegan', color: 'green'},
 	].forEach(
 		(option) => {
-			if (offer.toLowerCase().includes(option.food)) {
-				addBadge(offerElement, `badge-${option.color}`, option.food);
+			if (offer.name.toLowerCase().includes(option.food)) {
+				if (option.color !== 'green' && !offer.imgTitles) {
+					addBadge(offerElement, `badge-${option.color}`, option.food);
+				}
 			}
 		}
 	);
@@ -181,6 +198,24 @@ function addBadge(offerElement, className, value) {
 	badgeElement.className = `uk-badge ${className}`
 	badgeElement.textContent = `${value}`;
 	offerElement.appendChild(badgeElement);
+}
+
+function addImages(offerElement, imgTitles) {
+	const images = [
+		{titles: ['Vegan'], src: 'assets/vegan.svg'},
+		{titles: ['Taimetoit', 'Vegetarian'], src: 'assets/vegetarian.svg'},
+		{titles: ['Laktoosivaba', 'Lactose free'], src: 'assets/lactose-free.svg'},
+	];
+
+	imgTitles.forEach((imgTitle) => {
+		const imgElement = document.createElement('img');
+
+		imgElement.className = 'badge-icon uk-icon-image';
+		imgElement.src = images.find((image) => image.titles.includes(imgTitle))?.src;
+		imgElement.alt = imgTitle;
+		imgElement.title = imgTitle;
+		offerElement.appendChild(imgElement);
+	});
 }
 
 chrome.runtime.sendMessage({
